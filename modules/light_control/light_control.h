@@ -1,22 +1,24 @@
 //=====[#include guards - begin]===============================================
 
-#ifndef _PC_SERIAL_COM_H_
-#define _PC_SERIAL_COM_H_
+#ifndef _LIGHT_CONTROL_H_
+#define _LIGHT_CONTROL_H_
 
 //=====[Declaration of public defines]=========================================
 
 //=====[Declaration of public data types]======================================
 
+typedef enum {
+    RGB_LED_RED,
+    RGB_LED_GREEN,
+    RGB_LED_BLUE,
+} lightControl_t;
+
 //=====[Declarations (prototypes) of public functions]=========================
 
-void pcSerialComInit();
-char pcSerialComCharRead();
-void pcSerialComStringWrite( const char* str );
-void pcSerialComUpdate();
-bool pcSerialComCodeCompleteRead();
-void pcSerialComCodeCompleteWrite( bool state );
-void commandSetAlarmDateAndTime();//alarm has to be public 
-void commandShowAlarmDateAndTime();
+void lightControlInit();
+void lightControlUpdate();
+void lightControlBrightnessChangeRGBFactor( lightControl_t light, bool state );
+
 //=====[#include guards - end]=================================================
 
-#endif // _PC_SERIAL_COM_H_
+#endif // _LIGHT_CONTROL_H_

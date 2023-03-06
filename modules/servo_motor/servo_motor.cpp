@@ -2,44 +2,41 @@
 
 #include "mbed.h"
 #include "arm_book_lib.h"
-
-#include "siren.h"
 #include "alarm.h"
 
-#include "alarm_clock_system.h"
+#include "servo_motor.h"
 
 //=====[Declaration of private defines]========================================
-#define TIME_INCREMENT_MS           10
+
+#define DUTY_SPIN               0.015
+#define DUTY_STOP               0
+#define PERIOD                  0.02
+#define TIME                    20000
+
+
 //=====[Declaration of private data types]=====================================
 
 //=====[Declaration and initialization of public global objects]===============
 
-DigitalInOut sirenPin(PE_10); //buzzer is a digital input object
+PwmOut servo(PF_9);
 
 //=====[Declaration of external public global variables]=======================
 
 //=====[Declaration and initialization of public global variables]=============
-int accumulatedTimeAlarm = 0;
+
+
 //=====[Declaration and initialization of private global variables]============
 
 //=====[Declarations (prototypes) of private functions]========================
 
 //=====[Implementations of public functions]===================================
+void servoMotorUpdate()
 
-void sirenInit() //initalize to off, declare as an open drain
-{
-   sirenPin.mode(OpenDrain);
-   sirenPin.input();
-}
-void sirenUpdate() { //turns buzzer on, if alarm is on, else buzzer stays off
-    if (alarmState){
-       accumulatedTimeAlarm = accumulatedTimeAlarm + TIME_INCREMENT_MS;
-       sirenPin.output();
-       sirenPin = LOW; 
-    }
-    else{ 
-        sirenPin.input();
+{   servo.period(PERIOD); //set period to 20ms
+
+    if (alarmState){ //if alarmState = TRUE 
+    servo.write (DUTY_SPIN); //servo motor spins 
+    delay (TIME); //allowed time for blanket to move off bed
+    servo.write (DUTY_STOP); //servo motor stops 
     }
 }
-
-//=====[Implementations of private functions]==================================

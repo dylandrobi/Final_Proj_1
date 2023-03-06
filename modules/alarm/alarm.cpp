@@ -1,99 +1,71 @@
 //=====[Libraries]=============================================================
 
-#include "mbed.h"
+#include "mbed.h" ///need to compare the date and time hwere is alarm time being set 
 #include "arm_book_lib.h"
 
 #include "alarm.h"
+#include "user_interface.h"
 #include "siren.h"
-#include "strobe_light.h"
-#include "code.h"
-#include "matrix_keypad.h"
-#include "fire_alarm.h"
-#include "intruder_alarm.h"
+#include "light_control.h"
+#include "servo_motor.h"
+#include "ir_sensor.h"
+#include "pc_serial_com.h"
+//include sensor, and ldr stuff maybe try to merge the fire alarm module into this 
 
 //=====[Declaration of private defines]========================================
 
-#define STROBE_TIME_INTRUDER_ALARM          1000
-#define STROBE_TIME_FIRE_ALARM               500
-#define STROBE_TIME_FIRE_AND_INTRUDER_ALARM  100
 
 //=====[Declaration of private data types]=====================================
 
 //=====[Declaration and initialization of public global objects]===============
 
 //=====[Declaration of external public global variables]=======================
-
+bool alarmState;
 //=====[Declaration and initialization of public global variables]=============
 
 //=====[Declaration and initialization of private global variables]============
 
-static bool alarmState;
+
 
 //=====[Declarations (prototypes) of private functions]========================
 
 static void alarmDeactivate();
-static int alarmStrobeTime();
 
 //=====[Implementations of public functions]===================================
 
-void alarmInit()
+void alarmInit()//all initial functions
 {
     alarmState = OFF;
     sirenInit();
-    strobeLightInit();    
+    lightControlInit();
+    irSensorInit(); 
 }
 
-void alarmUpdate()
+void alarmUpdate() // when alarm is activated, buzzer, light, IR sensor and servo motor are on.  
 {
-    if ( alarmState ) {
-        
-        if ( codeMatchFrom(CODE_KEYPAD) ||
-             codeMatchFrom(CODE_PC_SERIAL) ) {
-            alarmDeactivate();
-        }
-        
-        sirenUpdate( alarmStrobeTime() );
-        strobeLightUpdate( alarmStrobeTime() );
-
-    } else if ( gasDetectedRead() || 
-                overTemperatureDetectedRead() || 
-                intruderDetectedRead() )  {
-
+    if currentTime == alarmDateAndTimeReadStr{// get right variable 
         alarmState = ON;
-        sirenStateWrite(ON);
-        strobeLightStateWrite(ON);
+        sirenUpdate();
+        lightControlUpdate();
+        irSensorUpdate();
+        servoMotorUpdate();
+    else{
+        alarmState = OFF;
+        }
     }
 }
 
-bool alarmStateRead()
-{
-    return alarmState;
-}
 
 //=====[Implementations of private functions]==================================
 
-static void alarmDeactivate()
+static void alarmDeactivate()//When motion is sensed for twenty seconds alarm is deactivated and
+                            //buzzer is off. 
 {
-    alarmState = OFF;
-    sirenStateWrite(OFF);
-    strobeLightStateWrite(OFF);
-    intruderAlarmDeactivate();
-    fireAlarmDeactivate();   
-}
-
-static int alarmStrobeTime()
-{
-    if ( ( gasDetectedRead() || overTemperatureDetectedRead() ) && 
-           intruderDetectedRead() ) {
-        return STROBE_TIME_FIRE_AND_INTRUDER_ALARM;
-
-    } else if ( gasDetectedRead() || overTemperatureDetectedRead() ) {
-        return STROBE_TIME_FIRE_ALARM;
-
-    } else if ( intruderDetectedRead() ) {
-        return STROBE_TIME_INTRUDER_ALARM;
-        
-    } else {
-        return 0;
+    if (bool irSensorUpdate(bool alarmState) == true){
+        alarmState = OFF;
+        sirenPin.input();
     }
+      
 }
+}
+

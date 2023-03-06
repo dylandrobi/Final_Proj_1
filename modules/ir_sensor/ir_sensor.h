@@ -1,7 +1,7 @@
 //=====[#include guards - begin]===============================================
 
-#ifndef _DATE_AND_TIME_H_
-#define _DATE_AND_TIME_H_
+#ifndef _IR_SENSOR_H_
+#define _IR_SENSOR_H_
 
 //=====[Declaration of public defines]=========================================
 
@@ -9,14 +9,11 @@
 
 //=====[Declarations (prototypes) of public functions]=========================
 
-char* dateAndTimeRead();
+void motionSensorInit();
+bool motionSensorRead();
+void motionSensorActivate();
+void motionSensorDeactivate();
 
-void dateAndTimeWrite( int year, int month, int day, 
-                       int hour, int minute, int second );
-char* alarmDateAndTimeRead();
-
-void alarmDateAndTimeWrite( int year, int month, int day, 
-                       int hour, int minute, int second );
 //=====[#include guards - end]=================================================
 
-#endif // _DATE_AND_TIME_H_
+#endif // _IR_SENSOR_H_

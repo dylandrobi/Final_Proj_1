@@ -1,10 +1,16 @@
 //=====[Libraries]=============================================================
 
-#include "arm_book_lib.h"
+#include "arm_book_lib.h"//changed this for dylan:)))))
 
-#include "bright_control.h"
+#include "alarm_clock_system.h"
 
-#include "light_level_control.h"//might delete
+#include "alarm.h"
+#include "user_interface.h"
+#include "fire_alarm.h"
+#include "pc_serial_com.h"
+#include "ir_sensor.h"
+#include "servo_motor.h"
+#include "light_control.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -12,39 +18,33 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
-PwmOut RGBLed[] = {(PB_4), (PA_0), (PD_12)};
-
-//=====[Declaration and initialization of private global objects]===============
-
 //=====[Declaration of external public global variables]=======================
 
 //=====[Declaration and initialization of public global variables]=============
 
 //=====[Declaration and initialization of private global variables]============
 
-static void setPeriod( lightSystem_t light, float period );
+//=====[Declarations (prototypes) of private functions]========================
 
 //=====[Implementations of public functions]===================================
 
-void brightControlInit()
+void alarmClockSystemInit()
 {
-    setPeriod( RGB_LED_RED, 0.01f );
-    setPeriod( RGB_LED_GREEN, 0.01f );
-    setPeriod( RGB_LED_BLUE, 0.01f );
-
-    setDutyCycle( RGB_LED_RED, 0.5f );
-    setDutyCycle( RGB_LED_GREEN, 0.5f );
-    setDutyCycle( RGB_LED_BLUE, 0.5f );
+    userInterfaceInit(); //keep
+    alarmInit();// keep
+    pcSerialComInit();//keep
+    motorControlInit();//motor sensor Initial 
+    lightControlInit();//might keep
 }
 
-void setDutyCycle( lightSystem_t light, float dutyCycle )
+void alarmClockSystemUpdate()
 {
-    RGBLed[light].write(dutyCycle);
+    userInterfaceUpdate();
+    alarmUpdate();
+    pcSerialComUpdate();
+    motorControlUpdate();
+    lightControlUpdate();
+    delay(SYSTEM_TIME_INCREMENT_MS);
 }
 
 //=====[Implementations of private functions]==================================
-
-static void setPeriod( lightSystem_t light, float period )
-{
-    RGBLed[light].period(period);
-}
