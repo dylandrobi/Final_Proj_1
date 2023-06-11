@@ -1,4 +1,4 @@
-Title of Project: Wake and shake 1795
+Title of Project: Wake and Shake 1795
 
 Team: "E.C. Going" Dylan Robichaud and Gabi Acosta
 
