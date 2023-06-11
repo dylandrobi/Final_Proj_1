@@ -1,7 +1,11 @@
 Title of Project: Wake and shake 1795
+
 Team: "E.C. Going" Dylan Robichaud and Gabi Acosta
+
 Course name: ECE-218: Embedded Microcontroller Projects
+
 Course professor: Cherrice Traver
+
 Textbook used: Arm - "A Beginner’s Guide to Designing Embedded System Applications on Arm Cortex-M Microcontrollers" by Ariel Lutenberg, Pablo Gomez, Eric Pernia.
 
 Summary of behavior: The user is allowed to set the alarm date and current time using their PC keyboard and serial monitor. The current time and the alarm time are compared, if they are equal, the alarm is activated. When the alarm is activated, the buzzer, IR sensor, RGB LED and servo motor are all activated. When the alarm is activated, the servo motor is turned on to remove the blanket off the bed. The servo motor stays on for 8 seconds then it stops rotating. The buzzer and RGB LED stays on until the IR sensor detects motion for 20 straight seconds, then the alarm is deactivated. After the deactivation of the alarm, the LED stays on if there isn’t enough light being sensed in the room by the LDR or else the LED turns off.
