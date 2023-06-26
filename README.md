@@ -1,4 +1,4 @@
-Wake and Shake 1795
+Wake and Shake
 
 Team: "E.C. Going" Dylan Robichaud and Gabi Acosta
 
