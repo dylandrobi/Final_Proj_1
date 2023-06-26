@@ -1,4 +1,4 @@
-Wake and Shake
+<img width="351" alt="WakeAndShakeLogo" src="https://github.com/dylandrobi/WakeAndShake/assets/124712580/98c10d20-e7e6-4064-931c-b74bd02136cf">
 
 Team: "E.C. Going" Dylan Robichaud and Gabi Acosta
 
