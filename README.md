@@ -11,6 +11,7 @@ Textbook used: Arm - "A Beginner’s Guide to Designing Embedded System Applicat
 Summary of behavior: The user is allowed to set the alarm date and current time using their PC keyboard and serial monitor. The current time and the alarm time are compared, if they are equal, the alarm is activated. When the alarm is activated, the buzzer, IR sensor, RGB LED and servo motor are all activated. When the alarm is activated, the servo motor is turned on to remove the blanket off the bed. The servo motor stays on for 8 seconds then it stops rotating. The buzzer and RGB LED stays on until the IR sensor detects motion for 20 straight seconds, then the alarm is deactivated. After the deactivation of the alarm, the LED stays on if there isn’t enough light being sensed in the room by the LDR or else the LED turns off.
 
 Detailed Project Summary: [M3_ Results Summary - Dylan  Gabi  (1).pdf](https://github.com/dylandrobi/WakeAndShake1795/files/11735309/M3_.Results.Summary.-.Dylan.Gabi.1.pdf)
+Project Video Summary: https://www.youtube.com/watch?v=7vTegn_WqNc
 
 List of Modules: Alarm Clock System - This module calls the initial functions of the hardware components as well as the update functions. This module is the only system. This code was based on the textbook.
 
